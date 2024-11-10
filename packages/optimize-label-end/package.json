@@ -1,0 +1,25 @@
+{
+  "name": "optimize-label-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "devlop": "^1.1.0",
+    "micromark-factory-destination": "^2.0.0",
+    "micromark-factory-label": "^2.0.0",
+    "micromark-factory-title": "^2.0.0",
+    "micromark-factory-whitespace": "^2.0.0",
+    "micromark-util-character": "^2.1.0",
+    "micromark-util-chunked": "^2.0.0",
+    "micromark-util-normalize-identifier": "^2.0.0",
+    "micromark-util-resolve-all": "^2.0.0",
+    "micromark-util-symbol": "^2.0.0",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5"
+  }
+}
