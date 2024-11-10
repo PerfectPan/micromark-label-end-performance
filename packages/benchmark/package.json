@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "benchmark": "node benchmark.mjs",
+    "original": "ndb --prof node original.mjs",
+    "optimize": "ndb --prof node optimize.mjs"
   },
   "keywords": [],
   "author": "",
   "dependencies": {
+    "benchmark": "^2.1.4",
     "optimize-label-end": "workspace:*",
+    "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
-    "unified": "^11.0.5"
+    "remark-rehype": "^11.1.1",
+    "unified": "^11.0.5",
+    "ndb": "1.1.5"
   }
 }
