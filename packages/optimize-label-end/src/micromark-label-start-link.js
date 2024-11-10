@@ -9,11 +9,11 @@
 
 import {ok as assert} from 'devlop'
 import {codes, types} from 'micromark-util-symbol'
-import {labelEnd} from './label-end.js'
+import {labelEnd} from './micromark-label-end.js';
 
 /** @type {Construct} */
 export const labelStartLink = {
-  name: 'labelStartLink',
+  name: 'labelStartLinkV2',
   resolveAll: labelEnd.resolveAll,
   tokenize: tokenizeLabelStartLink
 }

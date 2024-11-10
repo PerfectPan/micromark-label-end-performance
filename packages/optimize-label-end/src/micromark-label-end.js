@@ -23,7 +23,7 @@ import {codes, constants, types} from 'micromark-util-symbol'
 
 /** @type {Construct} */
 export const labelEnd = {
-  name: 'labelEnd',
+  name: 'labelEndV2',
   resolveAll: resolveAllLabelEnd,
   resolveTo: resolveToLabelEnd,
   tokenize: tokenizeLabelEnd
@@ -39,7 +39,7 @@ const referenceCollapsedConstruct = {tokenize: tokenizeReferenceCollapsed}
 /** @type {Resolver} */
 function resolveAllLabelEnd(events) {
   let index = -1
-
+  const removedEvents = []
   while (++index < events.length) {
     const token = events[index][1]
 
@@ -49,13 +49,17 @@ function resolveAllLabelEnd(events) {
       token.type === types.labelEnd
     ) {
       // Remove the marker.
-      events.splice(index + 1, token.type === types.labelImage ? 4 : 2)
+      // events.splice(index + 1, token.type === types.labelImage ? 4 : 2)
       token.type = types.data
-      index++
+      // skip the marker
+      removedEvents.push(token)
+      index += token.type === types.labelImage ? 5 : 3
+    } else {
+      removedEvents.push(token)
     }
   }
 
-  return events
+  return removedEvents
 }
 
 /** @type {Resolver} */
