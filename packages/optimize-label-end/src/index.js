@@ -1,10 +1,15 @@
 import {codes} from 'micromark-util-symbol'
-import { labelEnd } from './micromark-label-end'
-import { labelStartImage } from './micromark-label-start-image'
-import { labelStartLink } from './micromark-label-start-link'
+import { labelEnd } from './micromark-label-end.js'
+import { labelStartImage } from './micromark-label-start-image.js'
+import { labelStartLink } from './micromark-label-start-link.js'
 
 export function remarkOptimize() {
-  return {
+  const data = this.data()
+
+  const micromarkExtensions =
+    data.micromarkExtensions || (data.micromarkExtensions = [])
+
+  micromarkExtensions.push({
     text: {
       [codes.leftSquareBracket]: labelStartLink,
       [codes.exclamationMark]: labelStartImage,
@@ -13,5 +18,5 @@ export function remarkOptimize() {
     disable: {
       null: ['labelStartImage', 'labelStartLink', 'labelEnd']
     }
-  }
+  })
 }
