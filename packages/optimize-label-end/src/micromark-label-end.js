@@ -37,29 +37,34 @@ const referenceFullConstruct = {tokenize: tokenizeReferenceFull}
 const referenceCollapsedConstruct = {tokenize: tokenizeReferenceCollapsed}
 
 /** @type {Resolver} */
-function resolveAllLabelEnd(events) {
+function resolveAllLabelEnd(events, context) {
   let index = -1
-  const removedEvents = []
+  /** @type {Array<Event>} */
+  const newEvents = []
   while (++index < events.length) {
     const token = events[index][1]
-
+    if (newEvents.length > 0) {
+      push(newEvents, [events[index]])
+    } else {
+      newEvents.push(events[index]);
+    }
     if (
       token.type === types.labelImage ||
       token.type === types.labelLink ||
       token.type === types.labelEnd
     ) {
       // Remove the marker.
-      // events.splice(index + 1, token.type === types.labelImage ? 4 : 2)
+      const offset = token.type === types.labelImage ? 5 : 3
       token.type = types.data
-      // skip the marker
-      removedEvents.push(token)
-      index += token.type === types.labelImage ? 5 : 3
-    } else {
-      removedEvents.push(token)
+      index += offset
+      if (index < events.length) {
+        push(newEvents, [events[index]])
+      }
     }
   }
 
-  return removedEvents
+  splice(events, 0, events.length, newEvents)
+  return events
 }
 
 /** @type {Resolver} */
